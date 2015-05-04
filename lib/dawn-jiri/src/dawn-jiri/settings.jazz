@@ -23,7 +23,7 @@
 (jiri-version "1.0 closed-beta")
 (jiri-company "Republic of Dawn")
 (jiri-size (* 60 1024))
-(jiri-background {File Resources "lib" "dawn-setup" "assets" "background.png"})
+(jiri-background {File Resources "lib" "dawn-update" "assets" "background.png"})
 (jiri-application "Dawn")
 (jiri-development? #t)
 
