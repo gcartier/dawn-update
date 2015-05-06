@@ -41,7 +41,13 @@
 ;;;
 
 
-(jiri-install-remote "https://github.com/gcartier/dawn-install-windows.git")
+(cond-expand
+  (windows
+    (jiri-install-remote "https://github.com/gcartier/dawn-install-windows.git"))
+  (mac
+    (jiri-install-remote "https://github.com/gcartier/dawn-install-mac.git"))
+  (else))
+
 (jiri-install-branch "master")
 (jiri-install-dir "install/dawn-install")
 (jiri-current-dir "install/current")
@@ -52,7 +58,13 @@
 ;;;
 
 
-(jiri-app-remote "https://github.com/gcartier/dawn-windows.git")
+(cond-expand
+  (windows
+    (jiri-app-remote "https://github.com/gcartier/dawn-windows.git"))
+  (mac
+    (jiri-app-remote "https://github.com/gcartier/dawn-mac.git"))
+  (else))
+
 (jiri-app-branch "master")
 (jiri-app-dir "app/dawn")
 

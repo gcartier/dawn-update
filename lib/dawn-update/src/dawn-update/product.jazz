@@ -30,21 +30,18 @@
           (new-directory~ {Directory Build} (format "{a}.app/Contents/Resources" bundle))
         {Directory Build})))
   
-  (let ((dawn-update-dir {Directory Dawn-Update})
+  (let ((project-dir {Directory Dawn-Update})
         (resources-dir (resources-dir)))
-    (define (copy-assets)
-      (install-directory '("lib" "dawn-update" "assets")))
-    
     (define (install-file path)
-      (let ((src (new-file~ dawn-update-dir path))
+      (let ((src (new-file~ project-dir path))
             (dst (new-file~ resources-dir path)))
         (install-file~ src dst
           feedback: (lambda (action pathname)
                       (build-feedback "; {a} {a}..." action (get-name~ pathname))))))
     
-    (define (install-directory path)
-      (let ((src (new-directory~ dawn-update-dir path))
-            (dst (new-directory~ resources-dir path)))
+    (define (install-directory path (src #f) (dst #f))
+      (let ((src (new-directory~ project-dir (or src path)))
+            (dst (new-directory~ resources-dir (or dst path))))
         (install-directory~ src dst
           feedback: (let ((first? #t))
                       (lambda (action pathname)
@@ -52,9 +49,28 @@
                           (build-feedback "; {a} {a}..." action (get-name~ pathname))
                           (set! first? #f)))))))
     
+    (define (copy-fonts)
+      (install-directory #f '("jiri" "jazz" "etc" "fonts") '("jazz" "etc" "fonts")))
+    
+    (define (copy-assets)
+      (install-directory '("lib" "dawn-update" "assets")))
+    
     (build-product-descriptor descriptor unit: unit force?: force?)
     (initialize-aliases)
+    (copy-fonts)
     (copy-assets)))
+
+
+;;;
+;;;; Install
+;;;
+
+
+(definition (install descriptor)
+  (initialize-aliases)
+  (install-application descriptor (new-directory~ {Directory Home} '("Devel" "install"))
+    platform?: #t
+    git?: #t))
 
 
 ;;;
@@ -63,4 +79,5 @@
 
 
 (register-product 'dawn-update
-  build: build))
+  build: build
+  install: install))
