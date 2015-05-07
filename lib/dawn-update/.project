@@ -15,9 +15,10 @@
 
 (form
   (<Project>               name: dawn-update description-file: {File :context ".package"}
-    (<*>                                    tag-reference: {File :context "dawn-update.project"})
-    (<Project-Directory>                    directory: {Directory :context "src"}
-      (<Project-Directory>                  directory: {Directory :context "src" "dawn-update"}
-        (<Jazz-File>       name: run        source: {File :context "src" "dawn-update" "run.jazz"})
-        (<Jazz-File>       name: product    source: {File :context "src" "dawn-update" "product.jazz"})
-        (<Jazz-File>       name: appl       source: {File :context "src" "dawn-update" "appl.jazz"}))))))
+    (<*>                                     tag-reference: {File :context "dawn-update.project"})
+    (<Project-Directory>                     directory: {Directory :context "src"}
+      (<Project-Directory>                   directory: {Directory :context "src" "dawn-update"}
+        (<Jazz-File>       name: run         source: {File :context "src" "dawn-update" "run.jazz"})
+        (<Jazz-File>       name: product     source: {File :context "src" "dawn-update" "product.jazz"})
+        (<Jazz-File>       name: appl        source: {File :context "src" "dawn-update" "appl.jazz"})
+        (<Jazz-File>       name: settings    source: {File :context "src" "dawn-update" "settings.jazz"}))))))

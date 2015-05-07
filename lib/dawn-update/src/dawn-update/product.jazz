@@ -69,6 +69,7 @@
 (definition (install descriptor)
   (initialize-aliases)
   (install-application descriptor (new-directory~ {Directory Home} '("Devel" "install"))
+    name: "dawn-update.app"
     platform?: #t
     git?: #t))
 

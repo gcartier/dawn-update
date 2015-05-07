@@ -14,7 +14,7 @@
 (module dawn-update.run jazz
 
 
-(import (dawn-jiri.settings)
+(import (dawn-update.settings)
         (dawn-update.appl)
         (jiri.update))
 
