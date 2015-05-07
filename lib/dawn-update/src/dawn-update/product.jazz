@@ -5,10 +5,12 @@
 ;;;; Dawn-Update Product
 ;;;
 ;;;  The Initial Developer of the Original Code is Guillaume Cartier.
-;;;  Portions created by the Initial Developer are Copyright (C) 2012-2014
+;;;  Portions created by the Initial Developer are Copyright (C) 1996-2015
 ;;;  the Initial Developer. All Rights Reserved.
 ;;;
 ;;;  Contributor(s):
+;;;
+;;;  See www.jazzscheme.org for details.
 
 
 (module dawn-update.product jazz
@@ -50,7 +52,7 @@
                           (set! first? #f)))))))
     
     (define (copy-fonts)
-      (install-directory #f '("jiri" "jazz" "etc" "fonts") '("jazz" "etc" "fonts")))
+      (install-directory #f '("jiri" "jazz" "etc" "fonts") '("etc" "fonts")))
     
     (define (copy-assets)
       (install-directory '("lib" "dawn-update" "assets")))
@@ -66,9 +68,18 @@
 ;;;
 
 
+(cond-expand
+  (mac
+    (definition install-dir
+      {Directory Home "Devel" "install"}))
+  (else
+    (definition install-dir
+      {Directory Home "install"})))
+
+
 (definition (install descriptor)
   (initialize-aliases)
-  (install-application descriptor (new-directory~ {Directory Home} '("Devel" "install"))
+  (install-application descriptor install-dir
     name: "dawn-update.app"
     platform?: #t
     git?: #t))
